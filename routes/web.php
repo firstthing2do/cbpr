@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Foundation\Auth\EmailVerificationPromptController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -22,9 +23,15 @@ Route::get('/test-mail', function(){
 Route::get('/verify-email/{token}',[AuthController::class, 'verifyEmail'])->name('verify.email');
 Route::get('/login',[AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login' ,[AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/email-redirection', [AuthController::class, 'emailMessage']);
+Route::get('/dashboard', function(){
+    return view('dashboard');
+
+})->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::resource('contacts', ContactController::class);
 
 // Route::resource('contact', ContactController::class);

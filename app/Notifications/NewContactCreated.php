@@ -28,7 +28,8 @@ class NewContactCreated extends Notification
             ->line('A new contact has been added to your contact list')
             ->line('Name: '. $this->contact->name)
             ->line('Email: '. $this->contact->email)
-            ->action('View Contact', url('/contact/'. $this->contact->id));
+            ->action('View Contact', url('/contacts'))
+            ->line('Thank you for using our application!');
     }
     public function toArray(object $notifiable): array
     {

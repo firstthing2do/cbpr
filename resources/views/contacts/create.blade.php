@@ -1,0 +1,1 @@
+@include('contacts.form', ['contact' => new \App\Models\Contact()])

@@ -8,9 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    // use HasFactory, Notifiable;
+     use  Notifiable;
+    protected $primaryKey = 'UserId';
 
     protected $fillable = [
         'name',
@@ -30,5 +31,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
         ];
+    }
+    public function contacts(){
+        return $this->hasMany(Contact::class, 'UserId', 'UserId');
     }
 }
